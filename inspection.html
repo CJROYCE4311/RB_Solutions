@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RB Solutions Work Report</title>
+    <style>
+        :root {
+            --primary: #1f5a6e;
+            --accent: #32b8c6;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --border: #bdc3c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--danger);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="time"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(50, 184, 198, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .section-title {
+            background-color: var(--light);
+            padding: 12px;
+            margin: 25px 0 15px 0;
+            border-left: 4px solid var(--primary);
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #229954;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-reset {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background-color: #7f8c8d;
+        }
+
+        .status-message {
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #856404;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
+        .notes-input {
+            margin-top: 10px;
+            font-size: 13px;
+            padding: 8px;
+            border-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RB Solutions, LLC</h1>
+            <p>Work Performed Documentation</p>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <form id="inspectionForm">
+            <!-- Contact Information -->
+            <div class="form-group">
+                <label for="email" class="required">Email</label>
+                <input type="email" id="email" name="email" placeholder="homeowner@example.com" required>
+                <div class="note">Record as the email to be included with response</div>
+            </div>
+
+            <div class="section-title">Contact Information</div>
+
+            <div class="form-group">
+                <label for="property_name" class="required">Property Name</label>
+                <input type="text" id="property_name" name="property_name" placeholder="Property name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Staff_name" class="required">Staff Name</label>
+                <input type="text" id="Staff_name" name="Staff_name" placeholder="Staff member name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="required">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time" class="required">Time</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+
+            <!-- Service Checklist -->
+            <div class="section-title">Service Checklist</div>
+
+            <div class="form-group">
+                <label class="required">Mail Checked?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="mail_yes" name="mailChecked" value="Yes" required>
+                        <label for="mail_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="mail_no" name="mailChecked" value="No">
+                        <label for="mail_no">No</label>
+                    </div>
+                </div>
+                <select id="mail_status" name="mail_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Just junk">Just junk</option>
+                    <option value="Important mail">Important mail</option>
+                </select>
+                <input type="text" id="mail_notes" name="mail_notes" class="notes-input" placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Any packages/items on front porch?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="packages_yes" name="packages" value="Yes" required>
+                        <label for="packages_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="packages_no" name="packages" value="No">
+                        <label for="packages_no">No</label>
+                    </div>
+                </div>
+                <select id="packages_status" name="packages_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="None found">None found</option>
+                    <option value="Package(s) found">Package(s) found</option>
+                </select>
+                <input type="text" id="packages_notes" name="packages_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Exterior (front, back, sides)?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="exterior_yes" name="exterior" value="Yes" required>
+                        <label for="exterior_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="exterior_no" name="exterior" value="No">
+                        <label for="exterior_no">No</label>
+                    </div>
+                </div>
+                <select id="exterior_status" name="exterior_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Everything around the exterior looked picture perfect.">Everything around the
+                        exterior looked picture perfect.</option>
+                    <option value="There were pieces of trash that I picked up.">There were pieces of trash that I
+                        picked up.</option>
+                </select>
+                <input type="text" id="exterior_notes" name="exterior_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Pool equipment/fountains?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="pool_yes" name="pool" value="Yes" required>
+                        <label for="pool_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="pool_no" name="pool" value="No">
+                        <label for="pool_no">No</label>
+                    </div>
+                </div>
+                <select id="pool_status" name="pool_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Nothing to note regarding the pool equipment.">Nothing to note regarding the pool
+                        equipment.</option>
+                    <option value="The pool looked crystal clear">The pool looked crystal clear</option>
+                </select>
+                <input type="text" id="pool_notes" name="pool_notes" class="notes-input" placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Plants to water?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="plants_yes" name="plants" value="Yes" required>
+                        <label for="plants_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="plants_no" name="plants" value="No">
+                        <label for="plants_no">No</label>
+                    </div>
+                </div>
+                <select id="plants_status" name="plants_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Working as intended">No issues found</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="plants_notes" name="plants_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Toilets flushed? Leaks?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="toilets_yes" name="toilets" value="Yes" required>
+                        <label for="toilets_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="toilets_no" name="toilets" value="No">
+                        <label for="toilets_no">No</label>
+                    </div>
+                </div>
+                <select id="toilets_status" name="toilets_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Each toilet flushed twice, nothing to note">Each toilet flushed twice, nothing to
+                        note</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="toilets_notes" name="toilets_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Ran sinks? Leaks?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="sinks_yes" name="sinks" value="Yes" required>
+                        <label for="sinks_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="sinks_no" name="sinks" value="No">
+                        <label for="sinks_no">No</label>
+                    </div>
+                </div>
+                <select id="sinks_status" name="sinks_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Each sink was ran for a couple of minutes, nothing to note">Each sink was ran for a
+                        couple of minutes, nothing to note</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="sinks_notes" name="sinks_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Refrigerator/Stove?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="appliances_yes" name="appliances" value="Yes" required>
+                        <label for="appliances_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="appliances_no" name="appliances" value="No">
+                        <label for="appliances_no">No</label>
+                    </div>
+                </div>
+                <select id="appliances_status" name="appliances_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Working as intended">Working as intended</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="appliances_notes" name="appliances_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Garbage Disposal?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="disposal_yes" name="disposal" value="Yes" required>
+                        <label for="disposal_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="disposal_no" name="disposal" value="No">
+                        <label for="disposal_no">No</label>
+                    </div>
+                </div>
+                <select id="disposal_status" name="disposal_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Working as intended">Working as intended</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="disposal_notes" name="disposal_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Checked salt and softener system?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="salt_yes" name="salt" value="Yes" required>
+                        <label for="salt_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="salt_no" name="salt" value="No">
+                        <label for="salt_no">No</label>
+                    </div>
+                </div>
+                <select id="salt_status" name="salt_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="The salt and the softening system is adequate.">The salt and the softening system is
+                        adequate.</option>
+                    <option value="Working as intended">Working as intended</option>
+                </select>
+                <input type="text" id="salt_notes" name="salt_notes" class="notes-input" placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Interior and exterior checked for rodents/insects?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="pests_yes" name="pests" value="Yes" required>
+                        <label for="pests_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="pests_no" name="pests" value="No">
+                        <label for="pests_no">No</label>
+                    </div>
+                </div>
+                <select id="pests_status" name="pests_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option
+                        value="No signs of rodents or insects around the exterior of the home, inside the home, or in the garage.">
+                        No signs of rodents or insects around the exterior of the home,
+                        inside the home, or in the garage.</option>
+                    <option value="Ant hills noted">Ant hills noted</option>
+                </select>
+                <input type="text" id="pests_notes" name="pests_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">WIFI checked? Thermostat checked?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="systems_yes" name="systems" value="Yes" required>
+                        <label for="systems_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="systems_no" name="systems" value="No">
+                        <label for="systems_no">No</label>
+                    </div>
+                </div>
+                <label style="display:block; margin-top:10px; font-size:13px; font-weight:600;">Thermostat set
+                    to:</label>
+                <select id="thermostat_temp" name="thermostat_temp"
+                    style="margin-top: 5px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select temperature...</option>
+                </select>
+                <input type="text" id="systems_notes" name="systems_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">All windows checked/locked?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="windows_yes" name="windows" value="Yes" required>
+                        <label for="windows_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="windows_no" name="windows" value="No">
+                        <label for="windows_no">No</label>
+                    </div>
+                </div>
+                <select id="windows_status" name="windows_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Each window was checked and is locked">Each window was checked and is locked</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="windows_notes" name="windows_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">All doors checked/locked?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="doors_yes" name="doors" value="Yes" required>
+                        <label for="doors_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="doors_no" name="doors" value="No">
+                        <label for="doors_no">No</label>
+                    </div>
+                </div>
+                <select id="doors_status" name="doors_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option
+                        value="All doors were checked and are locked, and this includes the slider and garage doors">ll
+                        doors were checked and are locked, and this includes the slider
+                        and garage doors</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="doors_notes" name="doors_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Checked battery tender?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="battery_yes" name="battery" value="Yes" required>
+                        <label for="battery_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="battery_no" name="battery" value="No">
+                        <label for="battery_no">No</label>
+                    </div>
+                </div>
+                <select id="battery_status" name="battery_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Light solid green">Light solid green</option>
+                    <option value="Flashing red">Flashing red</option>
+                </select>
+                <input type="text" id="battery_notes" name="battery_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Special trips to allow service providers in?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="service_yes" name="serviceTrips" value="Yes" required>
+                        <label for="service_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="service_no" name="serviceTrips" value="No">
+                        <label for="service_no">No</label>
+                    </div>
+                </div>
+                <select id="service_status" name="service_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Working as intended">Working as intended</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="service_notes" name="service_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Visit after windstorm/haboob/monsoon?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="weather_yes" name="weather" value="Yes" required>
+                        <label for="weather_yes">Yes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="weather_no" name="weather" value="No">
+                        <label for="weather_no">No</label>
+                    </div>
+                </div>
+                <select id="weather_status" name="weather_status"
+                    style="margin-top: 10px; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;">
+                    <option value="" selected>Select status...</option>
+                    <option value="Working as intended">Working as intended</option>
+                    <option value="Issue found - see notes">Issue found - see notes</option>
+                </select>
+                <input type="text" id="weather_notes" name="weather_notes" class="notes-input"
+                    placeholder="Notes (optional)">
+            </div>
+
+            <!-- Additional Notes -->
+            <div class="section-title">Additional Information</div>
+
+            <div class="form-group">
+                <label for="additional" class="required">Additional Notes</label>
+                <textarea id="additional" name="additional"
+                    placeholder="Document any unusual observations, issues, or custom requests..." required></textarea>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Send Report</button>
+                <button type="reset" class="btn-reset">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('inspectionForm');
+        const statusMessage = document.getElementById('statusMessage');
+
+        // Set today's date as default
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').value = today;
+
+        // Populate Thermostat Dropdown (50-75)
+        const thermSelect = document.getElementById('thermostat_temp');
+        for (let i = 50; i <= 75; i++) {
+            const opt = document.createElement('option');
+            opt.value = i + ' degrees';
+            opt.textContent = i + ' degrees';
+            thermSelect.appendChild(opt);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate form
+            if (!form.checkValidity()) {
+                showStatus('Please complete all required fields.', 'error');
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                email: document.getElementById('email').value,
+                Property_name: document.getElementById('property_name').value,
+                Staff_name: document.getElementById('Staff_name').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                mailChecked: document.querySelector('input[name="mailChecked"]:checked')?.value || 'Not answered',
+                mail_status: document.getElementById('mail_status').value,
+                mail_notes: document.getElementById('mail_notes').value,
+                packages: document.querySelector('input[name="packages"]:checked')?.value || 'Not answered',
+                packages_status: document.getElementById('packages_status').value,
+                packages_notes: document.getElementById('packages_notes').value,
+                exterior: document.querySelector('input[name="exterior"]:checked')?.value || 'Not answered',
+                exterior_status: document.getElementById('exterior_status').value,
+                exterior_notes: document.getElementById('exterior_notes').value,
+                pool: document.querySelector('input[name="pool"]:checked')?.value || 'Not answered',
+                pool_status: document.getElementById('pool_status').value,
+                pool_notes: document.getElementById('pool_notes').value,
+                plants: document.querySelector('input[name="plants"]:checked')?.value || 'Not answered',
+                plants_status: document.getElementById('plants_status').value,
+                plants_notes: document.getElementById('plants_notes').value,
+                toilets: document.querySelector('input[name="toilets"]:checked')?.value || 'Not answered',
+                toilets_status: document.getElementById('toilets_status').value,
+                toilets_notes: document.getElementById('toilets_notes').value,
+                sinks: document.querySelector('input[name="sinks"]:checked')?.value || 'Not answered',
+                sinks_status: document.getElementById('sinks_status').value,
+                sinks_notes: document.getElementById('sinks_notes').value,
+                appliances: document.querySelector('input[name="appliances"]:checked')?.value || 'Not answered',
+                appliances_status: document.getElementById('appliances_status').value,
+                appliances_notes: document.getElementById('appliances_notes').value,
+                disposal: document.querySelector('input[name="disposal"]:checked')?.value || 'Not answered',
+                disposal_status: document.getElementById('disposal_status').value,
+                disposal_notes: document.getElementById('disposal_notes').value,
+                salt: document.querySelector('input[name="salt"]:checked')?.value || 'Not answered',
+                salt_status: document.getElementById('salt_status').value,
+                salt_notes: document.getElementById('salt_notes').value,
+                pests: document.querySelector('input[name="pests"]:checked')?.value || 'Not answered',
+                pests_status: document.getElementById('pests_status').value,
+                pests_notes: document.getElementById('pests_notes').value,
+                systems: document.querySelector('input[name="systems"]:checked')?.value || 'Not answered',
+                thermostat_temp: document.getElementById('thermostat_temp').value,
+                systems_notes: document.getElementById('systems_notes').value,
+                windows: document.querySelector('input[name="windows"]:checked')?.value || 'Not answered',
+                windows_status: document.getElementById('windows_status').value,
+                windows_notes: document.getElementById('windows_notes').value,
+                doors: document.querySelector('input[name="doors"]:checked')?.value || 'Not answered',
+                doors_status: document.getElementById('doors_status').value,
+                doors_notes: document.getElementById('doors_notes').value,
+                battery: document.querySelector('input[name="battery"]:checked')?.value || 'Not answered',
+                battery_status: document.getElementById('battery_status').value,
+                battery_notes: document.getElementById('battery_notes').value,
+                serviceTrips: document.querySelector('input[name="serviceTrips"]:checked')?.value || 'Not answered',
+                service_status: document.getElementById('service_status').value,
+                service_notes: document.getElementById('service_notes').value,
+                weather: document.querySelector('input[name="weather"]:checked')?.value || 'Not answered',
+                weather_status: document.getElementById('weather_status').value,
+                weather_notes: document.getElementById('weather_notes').value,
+                additional: document.getElementById('additional').value
+            };
+
+            // Send email via Formspree
+            try {
+                const response = await fetch('https://formspree.io/f/xwpgryke', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        subject: `RB Solutions Work Report - ${formData.date} by ${formData.Staff_name}`,
+                        message: formatEmailBody(formData)
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Report sent successfully!');
+                    showStatus('✓ Report sent successfully! A copy has been emailed to the homeowner.', 'success');
+                    form.reset();
+                    document.getElementById('date').value = today;
+                    setTimeout(() => statusMessage.style.display = 'none', 5000);
+                } else {
+                    showStatus('Error sending report. Please try again.', 'error');
+                }
+            } catch (error) {
+                showStatus('Network error. Please check your connection.', 'error');
+                console.error('Error:', error);
+            }
+        });
+
+        function formatEmailBody(data) {
+            return `
+RB Solutions, LLC - Work Performed Documentation
+
+VISIT DETAILS
+─────────────────────────────────
+Property: ${data.Property_name}
+Staff: ${data.Staff_name}
+Date: ${data.date}
+Time: ${data.time}
+
+SERVICE CHECKLIST
+─────────────────────────────────
+Mail Checked: ${data.mailChecked} ${data.mail_status ? `(${data.mail_status})` : ''} ${data.mail_notes ? `- ${data.mail_notes}` : ''}
+Packages/Items on Porch: ${data.packages} ${data.packages_status ? `(${data.packages_status})` : ''} ${data.packages_notes ? `- ${data.packages_notes}` : ''}
+Exterior (Front, Back, Sides): ${data.exterior} ${data.exterior_status ? `(${data.exterior_status})` : ''} ${data.exterior_notes ? `- ${data.exterior_notes}` : ''}
+Pool Equipment/Fountains: ${data.pool} ${data.pool_status ? `(${data.pool_status})` : ''} ${data.pool_notes ? `- ${data.pool_notes}` : ''}
+Plants to Water: ${data.plants} ${data.plants_status ? `(${data.plants_status})` : ''} ${data.plants_notes ? `- ${data.plants_notes}` : ''}
+Toilets Flushed & Checked for Leaks: ${data.toilets} ${data.toilets_status ? `(${data.toilets_status})` : ''} ${data.toilets_notes ? `- ${data.toilets_notes}` : ''}
+Sinks Ran & Checked for Leaks: ${data.sinks} ${data.sinks_status ? `(${data.sinks_status})` : ''} ${data.sinks_notes ? `- ${data.sinks_notes}` : ''}
+Refrigerator/Stove: ${data.appliances} ${data.appliances_status ? `(${data.appliances_status})` : ''} ${data.appliances_notes ? `- ${data.appliances_notes}` : ''}
+Garbage Disposal: ${data.disposal} ${data.disposal_status ? `(${data.disposal_status})` : ''} ${data.disposal_notes ? `- ${data.disposal_notes}` : ''}
+Checked salt and softener system: ${data.salt} ${data.salt_status ? `(${data.salt_status})` : ''} ${data.salt_notes ? `- ${data.salt_notes}` : ''}
+Interior/Exterior Checked for Pests: ${data.pests} ${data.pests_status ? `(${data.pests_status})` : ''} ${data.pests_notes ? `- ${data.pests_notes}` : ''}
+WIFI & Thermostat Checked: ${data.systems} ${data.thermostat_temp ? `(Thermostat: ${data.thermostat_temp})` : ''} ${data.systems_notes ? `- ${data.systems_notes}` : ''}
+All Windows Checked/Locked: ${data.windows} ${data.windows_status ? `(${data.windows_status})` : ''} ${data.windows_notes ? `- ${data.windows_notes}` : ''}
+All Doors Checked/Locked: ${data.doors} ${data.doors_status ? `(${data.doors_status})` : ''} ${data.doors_notes ? `- ${data.doors_notes}` : ''}
+Checked Battery Tender: ${data.battery} ${data.battery_status ? `(${data.battery_status})` : ''} ${data.battery_notes ? `- ${data.battery_notes}` : ''}
+Special Trips for Service Providers: ${data.serviceTrips} ${data.service_status ? `(${data.service_status})` : ''} ${data.service_notes ? `- ${data.service_notes}` : ''}
+Visit After Weather Event: ${data.weather} ${data.weather_status ? `(${data.weather_status})` : ''} ${data.weather_notes ? `- ${data.weather_notes}` : ''}
+
+ADDITIONAL NOTES
+─────────────────────────────────
+${data.additional}
+
+─────────────────────────────────
+Report Generated: ${new Date().toLocaleString()}
+            `;
+        }
+
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+        }
+    </script>
+</body>
+
+</html>

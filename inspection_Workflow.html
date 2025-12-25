@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RB Solutions - Workflow Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .shadow-lg {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4">
+
+    <!-- Print Button -->
+    <div class="max-w-3xl mx-auto mb-6 flex justify-end no-print">
+        <button onclick="window.print()"
+            class="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            <span class="text-sm font-medium">Print Guide</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-slate-200">
+
+        <!-- Header -->
+        <div class="bg-slate-900 text-white p-8 border-b border-slate-800">
+            <h1 class="text-3xl font-bold tracking-tight">RB Solutions</h1>
+            <div class="mt-2 flex items-center gap-2 text-blue-200">
+                <span class="uppercase tracking-wider text-xs font-semibold bg-blue-900/50 px-2 py-1 rounded">SOP</span>
+                <span class="text-lg">Client Report Workflow</span>
+            </div>
+            <p class="text-slate-400 text-sm mt-4">Standard Operating Procedure for converting inspection data into
+                client reports.</p>
+        </div>
+
+        <!-- Workflow Steps -->
+        <div class="p-8 space-y-8">
+
+            <!-- Step 1 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">1</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Submit Inspection</h3>
+                    <p class="text-slate-600 mt-1">Perform your home inspection as usual. Open the web form on your
+                        iPhone, fill in the details, and tap <strong>Submit</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">2</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Get the Data</h3>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-2">
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li>• Go to your email inbox and find the email subject: <strong>"New form
+                                    submission"</strong>.</li>
+                            <li>• Highlight the text in the email body (starting from "Property Name" down to the bottom
+                                of the notes).</li>
+                            <li>• <strong>Copy</strong> the highlighted text.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">3</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Process with Gemini</h3>
+                    <p class="text-slate-600 mt-1 mb-2">Open Google Gemini in your web browser and select the
+                        <strong>"Concierge Report Generator"</strong> Gem.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 list-disc list-inside ml-2">
+                        <li><strong>Paste</strong> the email text into the chat box and hit Enter.</li>
+                        <li>Gemini will reply with a block of code.</li>
+                        <li>Click the <strong>"Copy"</strong> button found at the top-right corner of that code block.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">4</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Create the Report</h3>
+                    <p class="text-slate-600 mt-1">Go to the <strong>Staff Portal</strong> on your website.</p>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mt-2">
+                        <ol class="space-y-2 text-sm text-blue-900 list-decimal list-inside">
+                            <li>Enter your PIN to login.</li>
+                            <li>Click on <strong>Report Generator</strong>.</li>
+                            <li><strong>Paste</strong> the code you copied from Gemini into the large text box.</li>
+                            <li>Click the blue button labeled <strong>"Create Report & Print"</strong>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white font-bold text-sm">5</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Save as PDF</h3>
+                    <p class="text-slate-600 mt-1">Your report will appear in a new tab and the Print window should open
+                        automatically.</p>
+                    <ul class="mt-2 space-y-1 text-sm text-slate-600">
+                        <li>• Change the <strong>Destination</strong> setting to <strong>"Save as PDF"</strong>.</li>
+                        <li>• Click <strong>Save</strong>.</li>
+                        <li>• Name the file (e.g., <code>Smith_Report_Dec15.pdf</code>) and save it.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white font-bold text-sm">6</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-slate-900">Send to Client</h3>
+                    <p class="text-slate-600 mt-1">Draft a new email to the client, attach the PDF you just created, and
+                        send!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="bg-slate-50 p-8 border-t border-slate-200">
+            <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Troubleshooting Tips
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded border border-slate-200 shadow-sm">
+                    <h5 class="font-semibold text-sm text-red-600 mb-1">Logo Missing?</h5>
+                    <p class="text-xs text-slate-600">Ensure the <code>RB_Solutions_Logo.jpg</code> file is uploaded to
+                        your website in the same folder as the Staff Portal files.</p>
+                </div>
+                <div class="bg-white p-4 rounded border border-slate-200 shadow-sm">
+                    <h5 class="font-semibold text-sm text-blue-600 mb-1">Dates look wrong?</h5>
+                    <p class="text-xs text-slate-600">You can edit the text inside the Gemini chat before copying the
+                        code if you need to make a quick correction.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-slate-900 text-slate-400 py-6 text-center text-xs">
+            <p>&copy; 2025 RB Solutions, LLC. Internal Use Only.</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
