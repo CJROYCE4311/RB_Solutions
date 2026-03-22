@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/Users/christopherroyce/Sterling_Web_design/1-Benga/Website-RB_Solutions"
+publish = "/Users/chrisroyce/Developer/Active_Clients/RB_Solutions"
 publishOrigin = "default"
 
 [build.environment]
